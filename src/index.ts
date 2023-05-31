@@ -1,13 +1,14 @@
 import mongoose, { MongooseError } from "mongoose";
 import dotenv from "dotenv";
-import app from "./app.js";
+import app from "./app";
 
 dotenv.config({ path: "./config.env" });
 
 const connectionUrl: string = process.env.DATABASE_URL as string;
-
 mongoose
-  .connect(connectionUrl)
+  .connect("mongodb://localhost:27017/iyaloja", {
+    family: 4,
+  })
   .then(() => console.log("DB connection successful"))
   .catch((e: MongooseError) =>
     console.log(`error connecting to database : --> ${e}`)
